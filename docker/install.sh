@@ -39,6 +39,6 @@ docker cp neo4j/load.cyp neo4j-tumblr:/var/lib/neo4j/import
 
 docker exec -ti neo4j-tumblr /var/lib/neo4j/bin/neo4j-shell -file /var/lib/neo4j/import/load.cyp
 
-echo "# You can access neo4j at http://$(docker-machine ip):7474"
+echo "# You can access neo4j at http://$(docker-machine ip || echo '127.0.0.1'):7474"
 
 echo "# DONE"
