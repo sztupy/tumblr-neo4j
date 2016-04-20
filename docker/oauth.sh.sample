@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# To obtain these values register a new OAuth application on Tumblr at
+#   https://www.tumblr.com/oauth/apps
+# You can use fake values for the URLs. Once done click the 'Explore API' button,
+# click "Show keys" and copy the values from there below:
+
+export CONSUMER_KEY=
+export CONSUMER_SECRET=
+export TOKEN=
+export TOKEN_SECRET=
