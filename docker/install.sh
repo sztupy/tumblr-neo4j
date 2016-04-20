@@ -15,8 +15,8 @@ docker run -ti --rm --name convert-dump \
 
 echo "# Loading up neo4j"
 
-docker stop neo4j-tumblr || /bin/true
-docker rm -f neo4j-tumblr || /bin/true
+docker stop neo4j-tumblr || /usr/bin/env true
+docker rm -f neo4j-tumblr || /usr/bin/env true
 
 docker run --detach --name neo4j-tumblr \
    --publish 7474:7474 \

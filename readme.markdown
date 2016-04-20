@@ -10,7 +10,7 @@ This app will load the data dump generated from Tumblr using [node-tumblr-map](h
   * Node.js 4.4.x
   * Nginx 1.9.x
 * Or
-  * Docker (including Docker Toolbox on Windows and Mac OSX)
+  * Docker 1.8+ (including Docker Toolbox on Windows and Mac OSX)
 * The resulting log file from step 1 of running [node-tumblr-map](https://github.com/madbence/node-tumblr-map)
 
 ## Install and usage
