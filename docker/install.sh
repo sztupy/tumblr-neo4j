@@ -15,8 +15,8 @@ docker run -ti --rm --name convert-dump \
 
 echo "# Loading up neo4j"
 
-docker stop neo4j-tumblr || /usr/bin/env true
-docker rm -f neo4j-tumblr || /usr/bin/env true
+docker stop neo4j-tumblr || true
+docker rm -f neo4j-tumblr || true
 
 docker run --detach --name neo4j-tumblr \
    --publish 7474:7474 \
@@ -39,6 +39,18 @@ docker cp neo4j/load.cyp neo4j-tumblr:/var/lib/neo4j/import
 
 docker exec -ti neo4j-tumblr /var/lib/neo4j/bin/neo4j-shell -file /var/lib/neo4j/import/load.cyp
 
-echo "# You can access neo4j at http://$(docker-machine ip || echo '127.0.0.1'):7474"
+echo "# Starting up nginx"
+
+docker stop nginx-tumblr || true
+docker rm -f nginx-tumblr || true
+
+docker run -d --name nginx-tumblr \
+  -v $PWD/nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro \
+  -v $PWD/nginx/html:/usr/share/nginx/html:ro \
+  -p 80:80 \
+  --link neo4j-tumblr:neo4j-tumblr \
+  $NGINX_DOCER_NAME
+
+echo "# You can access the site at http://$(docker-machine ip || echo '127.0.0.1')"
 
 echo "# DONE"

@@ -1,0 +1,128 @@
+<!doctype html>
+<html class="no-js" lang="hu">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Hunblarity</title>
+        <meta name="description" content="Huntumblarity">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-custom.js"></script>
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"light-floating"};
+        </script>
+
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        <!-- End Cookie Consent plugin -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
+        <!--[if lt IE 9]>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" />
+        <![endif]-->
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">A böngésződ már nagyon régi, így valószínű, hogy nem fog hibátlanul üzemelni vele a honlap. Nagyon kérünk, hogy <a href="http://browsehappy.com/">frissítsd a böngésződet</a></p>
+        <![endif]-->
+
+        <header>
+          <h1>Hunblarity</h1>
+          <a class="github-fork-ribbon" href="https://github.com/sztupy/tumblr-neo4j" title="Tegyél jobbá GitHubon">Tegyél jobbá GitHubon</a>
+        </header>
+
+        <div id="main">
+          <div id="hunblarity">
+            <p>Add meg a blogod nevét, és megmondjuk legfrissebb hunblarity számodat!<sup>*</sup></p>
+            <p>
+              <form method="get" id="hunblarity_form">
+                <input name="hunblarity_name" placeholder="legjobb-blog" type="text" />
+                <input name="hunblarity_button" type="submit" value="Mutasd"/>
+              </form>
+            </p>
+          </div>
+
+          <div id="hunblarity_result" style="display:none;">
+            <div id="hunblarity_name">HUNBLARITY</div>
+            <div id="hunblarity_rank"></div>
+            <div id="hunblarity_pos"></div>
+          </div>
+
+          <div id="hunblarity_advertisement"
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- hunblarity -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:320px;height:100px"
+                 data-ad-test="on"
+                 data-ad-client="ca-pub-3770178749249223"
+                 data-ad-slot="2417032645"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+
+          <div id="statistics">
+              <h2>Böngészd az adatokat</h2>
+              <p>Az alábbi gombok segítségével böngészgetheted a magyar tumbli adatbázisát,
+                és az egymás közötti kapcsolatokat. Ha megnyílt az oldal, akkor akármelyik
+                kék pöttyön (ami egy tumblit jelöl) lehet duplán klikkelni, és akkor megmutatja
+                a rendszer, hogy az adott tumbliból kiket reblogoltak.</p>
+              <div id="statistics_random">
+                <h3>Csak úgy böngészés</h3>
+                <form id="statistics_random_form" method="get">
+                  <input name="statistics_random_button" type="submit" value="Mutasd"/>
+                </form>
+              </div>
+              <div id="statistics_yourself">
+                <h3>Tumbli keresése</h3>
+                <form id="statistics_yourself_form" method="get">
+                  <label for="name">Tumbli neve:</label><input name="name" type="text" placeholder="mindig-sirok" />
+                  <input name="statistics_yourself_button" type="submit" value="Keres"/>
+                </form>
+              </div>
+              <div id="statistics_relationship">
+                <h3>Kapcsolatok két tumbli között</h3>
+                <form id="statistics_relationship_form" method="get">
+                  <label for="name_from">Egyik tumbli neve:</label><input name="name_from" type="text" placeholder="sikeres-tetofedo"/>
+                  <label for="name_to">Másik tumbli neve:</label><input name="name_to" type="text" placeholder="gyikka-valtozott-kiralylany"/>
+                  <input name="statistics_relationship_button" type="submit" value="Keres"/>
+                </form>
+              </div>
+              <div id="statistics_distance">
+                <h3>Távolság keresés két tumbli között</h3>
+                <form id="statistics_distance_form" method="get">
+                  <label for="name_from">Egyik tumbli neve:</label><input name="name_from" type="text" placeholder="valogatott-penge" />
+                  <label for="name_to">Másik tumbli neve:</label><input name="name_to" type="text" placeholder="sosemfeledtemeleztet" />
+                  <input name="statistics_distance_button" type="submit" value="Keres"/>
+                </form>
+              </div>
+          </div>
+
+        </div>
+
+        <footer>
+          <p><sup>*</sup>Figyelem, ez nem Grabovoj-szám, gyógyító erejéről nincs bizonyítékunk. Grabovoj-számként történő használatából keletkező
+            károsodásért felelősséget nem válallunk. Ha a számot túl alacsonynak találod, akkor viszont ajánljuk a
+            45413392885 (<a href="http://gyogyitoszamok.hu/szam/45413392885">Jobb hunblarity</a>) gyógyítószám alkalmazását.</p>
+          <p>A honlap által esetlegesen generált reklámbevételből a Gyíkember Alapítványt támogatjuk.</p>
+          <p>Ha érdekel, hogy mi is az a hunblarity, akkor <a href="http://hunblarity.tumblr.com/">kattints ide</a>.</p>
+          <p>Ha a technikai részletek érdekelnek, akkor <a href="https://github.com/sztupy/tumblr-neo4j">pedig ide</a>.</p>
+          <p>Készítette <a href="http://tumblr.sztupy.hu/">@sztupy</a>, <a href="http://napszemuveg.be/">@napszemuvegbe</a> ötlete alapján</p>
+          <p>Ha kérdésed van <a href="http://hunblarity.tumblr.com/ask">itt lehet feltenni</a></p>
+        </footer>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-9404141-10', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </body>
+</html>
