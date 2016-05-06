@@ -3,7 +3,7 @@
 set -e
 
 cd /root
-git clone https://github.com/madbence/node-tumblr-map.git
+git clone https://github.com/sztupy/node-tumblr-map.git
 
 cd node-tumblr-map
 npm i

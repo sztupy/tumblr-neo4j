@@ -4,6 +4,9 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "# Cleaning up docker images"
+echo "## Cleaning up Java images"
+docker rm -f neo4j-modules || true
+
 echo "## Cleaning up Neo4j images"
 docker stop neo4j-tumblr || true
 docker rm -f neo4j-tumblr || true
@@ -21,5 +24,6 @@ docker rm -f nginx-tumblr || true
 echo "# Cleaning up output directory"
 
 rm -rf "$DIR/../output"
+rm -rf "$DIR/../java/target"
 
 echo "# DONE"

@@ -1,56 +1,59 @@
 #!/usr/bin/env bash
 set -e
 
+if [[ $# -eq 0 ]] ; then
+    echo 'Please specify which steps to run'
+    echo 'Steps:'
+    echo '   A: Use the tumblr API to download post dump'
+    echo '   B: Initialize neo4j in RW mode with all modules'
+    echo '   C: Convert the post dump to CSV'
+    echo '   D: Import the CSV into Neo4j'
+    echo '   E: Do calculations on the imported data'
+    echo '   F: Finalize the database and make it read only. Also starts the browser'
+    echo
+    echo 'Note that step A doesn''t finish on it''s own, and has to be cancelled manually'
+    echo
+    echo 'Examples:'
+    echo "  To run the main steps:"
+    echo "    $0 BCDEF"
+    echo "  To only generate the dump:"
+    echo "    $0 A"
+    exit 0
+fi
+
+OPTIONS=$1
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-source "$DIR/globals.sh"
-
+source "$DIR/files/oauth.sh"
+source "$DIR/files/globals.sh"
 cd "$DIR/.."
+mkdir -p output
 
-echo "# Generating CSV files"
+if [[ $OPTIONS == *"A"* ]]; then
+ source "$DIR/steps/A1-generate-dump.sh"
+fi
 
-docker run -ti --rm --name convert-dump \
-  -v "$PWD":/usr/src/myapp -w /usr/src/myapp $RUBY_DOCKER_IMAGE \
-  ruby ruby/convert.rb output/dump.log
+if [[ $OPTIONS == *"B"* ]]; then
+  source "$DIR/steps/B1-build-pagerank-module.sh"
+  source "$DIR/steps/B2-start-neo4j.sh"
+fi
 
-echo "# Loading up neo4j"
+if [[ $OPTIONS == *"C"* ]]; then
+  source "$DIR/steps/C1-convert-dump-to-csv.sh"
+fi
 
-docker stop neo4j-tumblr || true
-docker rm -f neo4j-tumblr || true
+if [[ $OPTIONS == *"D"* ]]; then
+  source "$DIR/steps/D1-import-data-to-neo4j.sh"
+fi
 
-docker run --detach --name neo4j-tumblr \
-   --publish 7474:7474 \
-   --volume "$DIR/../output/data":/data \
-   $NEO4J_DOCKER_IMAGE
+if [[ $OPTIONS == *"E"* ]]; then
+  source "$DIR/steps/E1-calculate-pagerank.sh"
+  source "$DIR/steps/E2-calculate-hunblarity.sh"
+fi
 
-echo "# Waiting for neo4j to start"
-
-while ! docker logs neo4j-tumblr | grep -m1 'Started.'; do
-    docker logs neo4j-tumblr | tail -1
-    sleep 1
-done
-
-echo "# Importing data to neo4j"
-
-docker cp output/tumblrs.csv neo4j-tumblr:/var/lib/neo4j/import
-docker cp output/relations.csv neo4j-tumblr:/var/lib/neo4j/import
-docker cp output/original.csv neo4j-tumblr:/var/lib/neo4j/import
-docker cp neo4j/load.cyp neo4j-tumblr:/var/lib/neo4j/import
-
-docker exec -ti neo4j-tumblr /var/lib/neo4j/bin/neo4j-shell -file /var/lib/neo4j/import/load.cyp
-
-echo "# Starting up nginx"
-
-docker stop nginx-tumblr || true
-docker rm -f nginx-tumblr || true
-
-docker run -d --name nginx-tumblr \
-  -v $PWD/nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro \
-  -v $PWD/nginx/html:/usr/share/nginx/html:ro \
-  -p 80:80 \
-  --link neo4j-tumblr:neo4j-tumblr \
-  $NGINX_DOCER_NAME
-
-echo "# You can access the site at http://$(docker-machine ip || echo '127.0.0.1')"
+if [[ $OPTIONS == *"F"* ]]; then
+  source "$DIR/steps/F1-make-neo4j-read-only.sh"
+fi
 
 echo "# DONE"

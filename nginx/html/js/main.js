@@ -4,7 +4,7 @@
   var neo4jSettingsVersionKeyName = 'neo4j-tumblr.version';
   var neo4jSettingsVersionCurrentValue = 1;
   var neo4jSettingsKeyName = 'neo4j.settings';
-  var neo4jDefaultInitCommand = 'MATCH (n) RETURN n, rand() as r ORDER BY r LIMIT 1';
+  var neo4jDefaultInitCommand = 'MATCH (n:Blog) RETURN n, rand() as r ORDER BY r LIMIT 1';
 
   var ajaxCall = function(url, callback, data, x) {
   	try {
@@ -57,7 +57,7 @@
 
               document.getElementById('hunblarity_result').style.display = 'block';
             }
-          },'{"statements":[{"statement":"MATCH (n:TUMBLR{name:\\"'+newName+'\\"}) RETURN n.hunblarityRank, n.hunblarityPos","resultDataContents":["row","graph"],"includeStats":true}]}');
+          },'{"statements":[{"statement":"MATCH (n:Blog{name:\\"'+newName+'\\"}) RETURN n.hunblarityRank, n.hunblarityPos","resultDataContents":["row","graph"],"includeStats":true}]}');
       },'{"statements":[]}');
     }
   }
@@ -152,13 +152,13 @@
   }
 
   installClickHandler("statistics_random_form",function(form) {
-    return "MATCH (n) RETURN n, rand() as r ORDER BY r LIMIT 10";
+    return "MATCH (n:Blog) RETURN n, rand() as r ORDER BY r LIMIT 10";
   });
 
   installClickHandler("statistics_yourself_form",function(form) {
     var name = sanitizeTumblrName(form.name.value);
     if (name) {
-      return "MATCH (n:TUMBLR{name:'"+name+"'}) RETURN n";
+      return "MATCH (n:Blog{name:'"+name+"'}) RETURN n";
     }
   });
 
@@ -166,7 +166,7 @@
     var name1 = sanitizeTumblrName(form.name_from.value);
     var name2 = sanitizeTumblrName(form.name_to.value);
     if (name1 && name2) {
-      return "MATCH (n:TUMBLR{name:'"+name1+"'}),(k:TUMBLR{name:'"+name2+"'}),(x),(k)--(x)--(n) RETURN k,x,n";
+      return "MATCH (n:Blog{name:'"+name1+"'}),(k:Blog{name:'"+name2+"'}),(x),(k)--(x)--(n) RETURN k,x,n";
     }
   });
 
@@ -174,7 +174,7 @@
     var name1 = sanitizeTumblrName(form.name_from.value);
     var name2 = sanitizeTumblrName(form.name_to.value);
     if (name1 && name2) {
-      return "MATCH (from:TUMBLR{name:'"+name1+"'}),(to:TUMBLR{name:'"+name2+"'}),path=shortestPath((from)-[:REBLOG*]->(to)) RETURN path";
+      return "MATCH (from:Blog{name:'"+name1+"'}),(to:Blog{name:'"+name2+"'}),path=shortestPath((from)-[:REBLOG*]->(to)) RETURN path";
     }
   });
 
