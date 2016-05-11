@@ -53,6 +53,7 @@ public class PageRank
 
                     // TODO: this will calculate relations which hav an outgoing link to a node that doesn't have the
                     //       needed label as well, but checking this might make the code less performant
+                    //       it will also calculate relations which go back to the original node, which also skews the result
                     long sourceRelationshipCount = Iterables.count(source.getRelationships(Direction.OUTGOING, relationshipType));
 
                     if (source.hasProperty(property) && source.getProperty(property) instanceof Double) {

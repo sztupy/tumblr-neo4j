@@ -42,8 +42,8 @@
             var newResult = JSON.parse(newResponse);
             var data = newResult.results;
 
-            if (data) {
-              data = data[0].data[0]
+            if (data && data[0] && data[0].data && data[0].data[0]) {
+              data = data[0].data[0];
               var hunblarityRank = data.row[0];
               var hunblarityPos = data.row[1];
 
@@ -53,6 +53,16 @@
               if (!document.getElementById('hunblarity_rank').textContent) {
                 document.getElementById('hunblarity_rank').innerText = Math.round(hunblarityRank);
                 document.getElementById('hunblarity_pos').innerText = hunblarityPos;
+              }
+
+              document.getElementById('hunblarity_result').style.display = 'block';
+            } else {
+              document.getElementById('hunblarity_rank').textContent = "?????";
+              document.getElementById('hunblarity_pos').textContent = "?????";
+
+              if (!document.getElementById('hunblarity_rank').textContent) {
+                document.getElementById('hunblarity_rank').innerText = "?????";
+                document.getElementById('hunblarity_pos').innerText = "??????";
               }
 
               document.getElementById('hunblarity_result').style.display = 'block';
