@@ -10,6 +10,7 @@ if [[ $# -eq 0 ]] ; then
     echo '   D: Import the CSV into Neo4j'
     echo '   E: Do calculations on the imported data'
     echo '   F: Finalize the database and make it read only. Also starts the browser'
+    echo '   G: Backups the blog details which can be saved for statistic purposes'
     echo
     echo 'Note that step A doesn''t finish on it''s own, and has to be cancelled manually'
     echo
@@ -54,6 +55,10 @@ fi
 
 if [[ $OPTIONS == *"F"* ]]; then
   source "$DIR/steps/F1-make-neo4j-read-only.sh"
+fi
+
+if [[ $OPTIONS == *"G"* ]]; then
+  source "$DIR/steps/G1-backup-blog-data.sh"
 fi
 
 echo "# DONE"
